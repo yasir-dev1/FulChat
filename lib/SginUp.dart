@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_messenger/Login.dart';
 import 'package:whatsapp_messenger/Controller.dart';
+import 'AuthController.dart';
 
 class SignUpPage extends StatelessWidget {
+  final  AuthController  authController = Get.find();
   final MainController controller = Get.find();
   final TextEditingController password = TextEditingController();
   final TextEditingController username = TextEditingController();
   final TextEditingController email = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final RegExp PasswordRegx=RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,12}$");
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,19 +79,13 @@ class SignUpPage extends StatelessWidget {
                     labelText: 'Password',
                     prefixIcon: Icon(Icons.lock),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty || PasswordRegx.hasMatch(value) == false ) {
-                      return 'Enter a valid password';
-                    }
-                    return null;
-                  },
                 ),
                 SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (formKey.currentState?.validate() ?? false) {
                       // Form is valid, proceed with SignUp
-                      controller.SignUp(password.text, username.text, email.text);
+                      await authController.Reg(email.text, password.text);
                       username.clear();
                       password.clear();
                     }
@@ -97,6 +93,7 @@ class SignUpPage extends StatelessWidget {
                   child: Text('SignUp'),
                 ),
                 SizedBox(height: 16),
+                SizedBox(height: 16,),
                 TextButton(
                   onPressed: () {
                     Get.to(LoginPage());

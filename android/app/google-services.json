@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "112675945067",
+    "project_id": "fulchat-eba4a",
+    "storage_bucket": "fulchat-eba4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112675945067:android:e3130483ce6a7fcc360f2e",
+        "android_client_info": {
+          "package_name": "com.example.whatsapp_messenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMFCG1hjUOT9W2RZeBZXCDF4KItPcKGCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

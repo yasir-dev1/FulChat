@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whatsapp_messenger/Login.dart';
 import 'Controller.dart';
+import 'AuthController.dart';
 
 class ForgetPassword extends StatelessWidget {
   final MainController controller = Get.find();
+  final  AuthController  authController = Get.find();
   final TextEditingController password = TextEditingController();
   final TextEditingController username = TextEditingController();
   final TextEditingController email = TextEditingController();
@@ -56,15 +59,17 @@ class ForgetPassword extends StatelessWidget {
                 ),
                 SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (formKey.currentState?.validate() ?? false) {
                       // Form is valid, proceed with SignUp
-                      controller.ForgetPassword(email.text);
+                      await authController.ResetPassword(email.text);
                       email.clear();
                     }
                   },
                   child: Text('Search'),
                 ),
+                SizedBox(height: 16,),
+                TextButton(onPressed: () {Get.to(LoginPage());}, child: Text("Back To Login"))
               ],
             ),
           ),

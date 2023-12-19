@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'AuthController.dart';
 import 'ForgetPassword.dart';
 import 'SginUp.dart';
 import 'Controller.dart';
@@ -7,8 +8,9 @@ import 'Controller.dart';
 
 class LoginPage extends StatelessWidget {
   final MainController controller = Get.find();
+  final  AuthController  authController = Get.find();
   final TextEditingController Password = TextEditingController();
-  final TextEditingController Username = TextEditingController();
+  final TextEditingController Email = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -43,14 +45,14 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               TextFormField(
-                  controller: Username,
+                  controller: Email,
                   decoration: InputDecoration(
-                    labelText: 'Username',
-                    prefixIcon: Icon(Icons.person),
+                    labelText: 'Email',
+                    prefixIcon: Icon(Icons.email),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please a username';
+                      return 'Please Enter a Email';
                     }
                     return null;
                   },
@@ -75,8 +77,8 @@ class LoginPage extends StatelessWidget {
                 onPressed: () async {
                     if (formKey.currentState?.validate() ?? false) {
                       // Form is valid, proceed with SignUp
-                      controller.Login(Password.text, Username.text);
-                      Username.clear();
+                      await authController.Login(Email.text, Password.text);
+                      Email.clear();
                       Password.clear();
                     }
                 },

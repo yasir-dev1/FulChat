@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whatsapp_messenger/HomePage.dart';
 import 'AuthController.dart';
 import 'ForgetPassword.dart';
 import 'SginUp.dart';
@@ -14,7 +15,9 @@ class LoginPage extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      
       body: Center(
         child: Container(
           padding: EdgeInsets.all(16),
@@ -37,7 +40,7 @@ class LoginPage extends StatelessWidget {
            Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              FlutterLogo(size: 100),
+              RotationTransition(turns:AlwaysStoppedAnimation(45/360),child: FlutterLogo(size: 100),),
               SizedBox(height: 16),
               Text(
                 'Login',
@@ -87,6 +90,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: 16),
               TextButton(onPressed: (){Get.to(SignUpPage());}, child: Text("Create New Accont")),
               TextButton(onPressed: (){Get.to(ForgetPassword());}, child: Text("I Forget My Password")),
+              TextButton(onPressed: (){Get.to(HomePage());}, child: Text("Test")),
             ],
           ),
         )

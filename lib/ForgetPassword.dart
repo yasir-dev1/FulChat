@@ -29,7 +29,7 @@ class ForgetPassword extends StatelessWidget {
                 spreadRadius: 5,
                 blurRadius: 7,
                 offset: Offset(0, 3),
-              ),
+              ),  
             ],
           ),
           child: Form(
@@ -37,7 +37,7 @@ class ForgetPassword extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                FlutterLogo(size: 100),
+                RotationTransition(turns:AlwaysStoppedAnimation(45/360),child: FlutterLogo(size: 100),),
                 SizedBox(height: 16),
                 Text(
                   'Find Your Accont',

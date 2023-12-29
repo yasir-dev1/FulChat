@@ -1,17 +1,19 @@
+
+import 'HomePage.dart';
 import 'Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+class AuthController extends GetxController {
+  final User? user = FirebaseAuth.instance.currentUser;
 
-class AuthController extends GetxController{
-  final User? user=FirebaseAuth.instance.currentUser;
-
-  Future <void> Login(String email,String password) async{
+  Future<void> Login(String email, String password) async {
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password
       );
+      Get.to(HomePage());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -19,14 +21,19 @@ class AuthController extends GetxController{
         print('Wrong password provided for that user.');
       }
     }
-
   }
-  Future <void> Reg(String email,String password) async{
+
+  Future<void> Reg(String email, String password) async {
     try {
       final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      // Send email verification
+      await credential.user!.sendEmailVerification();
+
+      Get.to(HomePage());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -36,13 +43,11 @@ class AuthController extends GetxController{
     } catch (e) {
       print(e);
     }
-
   }
 
-  Future <void> ResetPassword(String email) async{
+  Future<void> ResetPassword(String email) async {
     try {
       final credential = await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -52,11 +57,10 @@ class AuthController extends GetxController{
     } catch (e) {
       print(e);
     }
-
   }
-  Future <void> LogOut() async {
+
+  Future<void> LogOut() async {
     FirebaseAuth.instance.signOut();
     Get.to(LoginPage());
   }
-
 }

@@ -37,7 +37,7 @@ class SignUpPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                FlutterLogo(size: 100),
+                RotationTransition(turns:AlwaysStoppedAnimation(45/360),child: FlutterLogo(size: 100),),
                 SizedBox(height: 16),
                 Text(
                   'SignUp',
